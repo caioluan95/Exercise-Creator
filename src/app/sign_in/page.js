@@ -10,7 +10,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 const authSchema = yup.object({
-  name: yup.string().required("Enter a valid name"),
   email: yup.string().email().required("Enter a valid e-mail"),
   password: yup
     .string()
@@ -20,22 +19,31 @@ const authSchema = yup.object({
       /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])/,
       "The password must contain at least one number, one capital letter and one special character"
     ),
-  repeat_password: yup
-    .string()
-    .oneOf([yup.ref("password"), null], "The passwords must be the same")
-    .required("Repeat the password to confirm"),
 });
-export default function SignUp() {
-  const { control, handleSubmit, formState, isValid } = useForm({
+
+export default function SignIn() {
+  const { control, handleSubmit, formState } = useForm({
     resolver: yupResolver(authSchema),
     mode: "onChange",
   });
   const router = useRouter();
   async function onSubmit(data) {
-    const response = await post("users", data);
-    console.log(response.message);
-    toast.success("User registered with success");
-    router.replace("/sign_in");
+    const response = await post("users/signIn", data);
+    console.log("opa", response.message);
+
+    const responseString = JSON.stringify(response);
+    localStorage.setItem("responseRequest", responseString);
+
+    toast.success("User successfully logged in");
+    router.replace("/dashboard");
+  }
+
+  function recoverPassword() {
+    router.push("/pass_recovery");
+  }
+
+  function createAccount() {
+    router.push("/sign_up");
   }
 
   return (
@@ -46,16 +54,6 @@ export default function SignUp() {
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="p-8 rounded w-96 space-y-4">
-            <InputControlled
-              control={control}
-              className="p-2 w-full border rounded-lg"
-              type="text"
-              id="nameInput"
-              name="name"
-              placeholder="name"
-              hasError={formState.errors.name}
-            />
-
             <InputControlled
               control={control}
               className="p-2 w-full border rounded-lg"
@@ -76,27 +74,29 @@ export default function SignUp() {
               hasError={formState.errors.password}
             />
 
-            <InputControlled
-              control={control}
-              className="p-2 w-full border rounded-lg"
-              name="repeat_password"
-              type="password"
-              id="repeatPasswordInput"
-              placeholder="repeat password"
-              hasError={formState.errors.passwordRepeat}
-            />
-
             <Button
               type="submit"
-              className={`bg-sky-400 p-1 rounded-md text-white w-full shadow-md ${
-                !formState.isValid
-                  ? "opacity-50 cursor-not-allowed"
-                  : "cursor-pointer"
-              }`}
-              disabled={!formState.isValid}
+              className={`bg-sky-400 p-1 rounded-md text-white w-full shadow-md cursor-pointer`}
             >
-              Register
+              Login
             </Button>
+
+            <div className="flex justify-between">
+              <button
+                type="button"
+                className="text-blue-500 underline text-sm cursor-pointer"
+                onClick={recoverPassword}
+              >
+                Forgot your password?
+              </button>
+              <button
+                type="button"
+                className="text-blue-500 underline text-sm cursor-pointer"
+                onClick={createAccount}
+              >
+                Register now.
+              </button>
+            </div>
           </div>
         </form>
       </div>
