@@ -35,7 +35,7 @@ export default function SignUp() {
     const response = await post("users", data);
     console.log(response.message);
     toast.success("User registered with success");
-    router.replace("/sign_in");
+    router.replace("/");
   }
 
   return (

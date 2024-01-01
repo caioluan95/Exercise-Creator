@@ -13,16 +13,15 @@ async function request(url, method, data = null) {
       options
     );
     const responseData = await response.json();
+
     if (response.ok) {
       return responseData;
     }
 
-    throw new Error(responseData.message || "Erro na requisição");
+    throw new Error(responseData.error || "An unexpected error ocurred");
   } catch (error) {
-    toast.error(error.message || "Aconteceu um erro inesperado na requisição");
-    throw new Error(
-      error.message || "Aconteceu um erro inesperado na requisição"
-    );
+    toast.error(error.message || "An unexpected error ocurred");
+    throw new Error(error.message || "An unexpected error ocurred");
   }
 }
 
