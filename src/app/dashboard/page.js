@@ -7,7 +7,9 @@ export default function Dashboard() {
   return (
     <main>
       <Navbar />
+
       <Sidebar />
+
       <DashboardContent />
     </main>
   );

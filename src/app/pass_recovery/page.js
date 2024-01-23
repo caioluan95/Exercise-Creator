@@ -1,3 +1,3 @@
 export default function PassRecovery() {
-  <p>Recover your Password</p>;
+  return <p>Recover your Password</p>;
 }

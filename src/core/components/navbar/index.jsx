@@ -12,6 +12,7 @@ export default function Navbar() {
               <div className="pr-10 sm:pr-0">
                 <DrawerDefault />
               </div>
+
               <div className="flex justify-between pl:20 sm:pl-40">
                 <div>
                   <InputSearch />

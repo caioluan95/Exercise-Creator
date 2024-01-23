@@ -9,6 +9,7 @@ export default function InputSearch() {
             <IoMdSearch classNameName="text-gray-500" />
             <span className="sr-only">Search icon</span>
           </div>
+
           <input
             type="text"
             id="search-navbar"
