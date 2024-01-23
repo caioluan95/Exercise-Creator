@@ -19,7 +19,7 @@ export default function Navbar() {
                 </div>
               </div>
             </div>
-            <div className="flex items-center pr-8">
+            <div className="flex items-center pr-4">
               <div className="flex items-center ms-3">
                 <div>
                   <AvatarRounded />
