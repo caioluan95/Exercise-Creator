@@ -80,7 +80,7 @@ export default function SignIn() {
 
             <Button
               type="submit"
-              className={`bg-sky-400 p-1 rounded-md text-white w-full shadow-md cursor-pointer`}
+              className={`bg-blue-500 p-1 rounded-md text-white w-full shadow-md cursor-pointer`}
             >
               Login
             </Button>

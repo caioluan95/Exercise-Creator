@@ -38,6 +38,10 @@ export default function SignUp() {
     router.replace("/");
   }
 
+  function loginPage() {
+    router.replace("/");
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center align-between">
       <div className="flex h-screen flex-col items-center justify-center">
@@ -88,7 +92,7 @@ export default function SignUp() {
 
             <Button
               type="submit"
-              className={`bg-sky-400 p-1 rounded-md text-white w-full shadow-md ${
+              className={`bg-blue-500 p-1 rounded-md text-white w-full shadow-md ${
                 !formState.isValid
                   ? "opacity-50 cursor-not-allowed"
                   : "cursor-pointer"
@@ -97,6 +101,13 @@ export default function SignUp() {
             >
               Register
             </Button>
+            <button
+              type="button"
+              className="text-blue-500 underline text-sm cursor-pointer"
+              onClick={loginPage}
+            >
+              Already have an account?
+            </button>
           </div>
         </form>
       </div>
